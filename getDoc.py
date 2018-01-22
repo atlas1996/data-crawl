@@ -13,9 +13,8 @@ def getLinks(pageUrl):
     session = requests.Session()
     headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5)\
                               AppleWebKit 537.36 (KHTML, like Gecko) Chrome",
-               "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9\
-                          ,image/webp,*/*;q=0.8"}
-    url = "https://cloud.tencent.com/document/product/213/3687"
+               "Accept": "*/*"}
+    url = "https://cloud.tencent.com/document/product/213/2180"
     try:
         html = session.get(url, headers=headers)
     except URLError as e:
@@ -25,12 +24,12 @@ def getLinks(pageUrl):
         elif hasattr(e, 'code'):
             print ("The server couldn\'t fulfill the request.")
             print ("Error code: ", e.code)
-    bsObj = BeautifulSoup(html.content, "lxml")
+    bsObj = BeautifulSoup(html, "html5lib")
     uppper = bsObj.findAll("span", {"class": "feedback-down-count"})
     downer = bsObj.findAll("span", {"class": "feedback-up-count"})
     print(bsObj)
     print(bsObj.title)
-    print(uppper.innerText)
+    print(uppper)
     print(downer)
 
 
