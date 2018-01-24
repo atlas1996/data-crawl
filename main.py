@@ -31,25 +31,21 @@ def city_confirm(city1, city2):
         return False
     return True
 
-def city_select(x, mode, opt):
+def city_select(city):
     """核心代码部分，参数x为成语，返回该成语的接龙匹配成语"""
-    if x == None:
-        with open('city.txt','r') as f:
-            return random.choice(f.readlines())[:-1]
+    if city == None:
+        with open('city.txt','r') as file:
+            return random.choice(file.readlines())[:-1]
     else:
-        with open('city.txt','r') as f:
+        with open('city.txt','r') as file:
             #以下六行代码，通过索引排除无效循环，显著提升运行效率
-            pinyin = chinese_to_alphabet(x[-1])
-            base = f.readlines()
+            alphabet = chinese_to_alphabet(city[-1])
+            base = file.readlines()
             random.shuffle(base)
             for i in base:
-                if i[:-1] == x or (opt == 0 and len(i) != 5):
+                if i[:-1] == city:
                     continue
-                if mode == 0 and i[0] == x[-1]:
-                    return i[:-1]
-                if mode == 1 and chinese_to_alphabet(i[0]) == pinyin:
-                    return i[:-1]
-                if mode == 2 and chinese_to_alphabet(i[0])[:-2] == pinyin[:-2]:
+                if chinese_to_alphabet(i[0])[:-2] == alphabet [:-2]:
                     return i[:-1]
         return None
 
