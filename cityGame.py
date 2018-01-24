@@ -1,15 +1,19 @@
-import random
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import random
+import time
 
 
 def get_city():
     html = urlopen("http://weather.com.cn/radar")
     bsObj = BeautifulSoup(html, "lxml")
+    print("城市名称采集中……")
+    time.sleep(3)
     cityList = bsObj.findAll("a", href="#")
     with open('city.txt', 'w') as file:
         for city in cityList:
             file.write(city.string+'\n')
+            print(city.string)
 
 
 def chinese_to_alphabet(chinese):
@@ -72,12 +76,12 @@ def start(start = 0):
                 break
         print(city1)
     else:
-        city1 = input("请输入成语:")
+        city1 = input("请输入城市名：")
         if city1.strip() == '':
             print("游戏结束！你输了")
             return 0
         if city_exists(city1) == False:
-            print("游戏结束！该成语不存在")
+            print("游戏结束！该城市名称不存在")
             return 0
         memory.add(city1)
         cycle_flag = 0  #控制while True循环次数
@@ -96,14 +100,14 @@ def start(start = 0):
             print(city2)
             memory.add(city2)
     while True:
-        city2 = input("请输入成语:")
+        city2 = input("请输入城市名:")
         if city2.strip() == '':
             print("游戏结束！你输了")
         if city_exists(city2) == False:
-            print("游戏结束！该成语不存在")
+            print("游戏结束！该城市名不存在")
             return 0
         if city2 in memory:
-            print("游戏结束！该成语已被使用过")
+            print("游戏结束！该城市名已被使用过")
             return 0
         if city_confirm(city1, city2) == False:
             print("游戏结束！你未遵守游戏规则")
