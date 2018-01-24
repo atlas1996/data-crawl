@@ -47,10 +47,6 @@ def idiom_select(x, mode, opt):
             #以下六行代码，通过索引排除无效循环，显著提升运行效率
             pinyin = chinese_to_pinyin(x[-1])
             base = f.readlines()
-            if pinyin[0] != 'Z':
-                base = base[base.index(pinyin[0]+'\n'):base.index(chr(ord(pinyin[0])+1)+'\n')]
-            else:
-                base = base[base.index(pinyin[0]+'\n'):]
             random.shuffle(base)
             for i in base:
                 if i[:-1] == x or (opt == 0 and len(i) != 5):

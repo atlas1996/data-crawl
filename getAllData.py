@@ -11,7 +11,8 @@ driver = webdriver.Chrome(chrome_options=options)
 def markdownParser(bsObj):
     markdown = bsObj.find("div", {"class": "markdown-text-box"})
     print(markdown.h1.text)
-    print(markdown.findAll("h2").count)
+    print(markdown.h2.text)
+
 
 def getData(pageUrl):
     global pages
