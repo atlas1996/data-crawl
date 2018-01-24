@@ -37,10 +37,20 @@ def city_select(x, mode, opt):
         with open('city.txt','r') as f:
             return random.choice(f.readlines())[:-1]
     else:
+<<<<<<< HEAD
         with open('city.txt','r') as f:
             #以下六行代码，通过索引排除无效循环，显著提升运行效率
             pinyin = chinese_to_alphabet(x[-1])
             base = f.readlines()
+=======
+        with open('idiom.txt','r') as f:
+<<<<<<< HEAD
+            #以下六行代码，通过索引排除无效循环，显著提升运行效率
+            pinyin = chinese_to_pinyin(x[-1])
+            base = f.readlines()
+=======
+>>>>>>> 698c4757f494d8bec875ca2e774ba892579a44a8
+>>>>>>> 06ed0e752b683c559cbfcb7c01578c078a58850a
             random.shuffle(base)
             for i in base:
                 if i[:-1] == x or (opt == 0 and len(i) != 5):
