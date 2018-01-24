@@ -1,4 +1,15 @@
 import random
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+
+def get_city():
+    html = urlopen("http://weather.com.cn/radar")
+    bsObj = BeautifulSoup(html, "lxml")
+    cityList = bsObj.findAll("a", href="#")
+    with open('city.txt', 'w') as file:
+        for city in cityList:
+            file.write(city.string+'\n')
 
 
 def chinese_to_alphabet(chinese):
@@ -15,6 +26,7 @@ def chinese_to_alphabet(chinese):
         except:
             alphabet += 'XXXX ' #非法字符我们用XXXX代替
     return alphabet
+
 
 def city_exists(city):
     """判断是否为城市的函数，参数为字符串，判断该字符串是否在成语库中"""
@@ -52,6 +64,7 @@ def city_select(city):
 def start(start = 0):
     """start参数表示先后手，0表示电脑先手，1表示玩家先手；返回值代表游戏结果，为0表示玩家失败，为1代表玩家胜利"""
     memory = set()  #记忆集合，用于判断成语是否被重复使用
+    get_city()
     if start == 0:
         while True:
             city1 = city_select(None)
