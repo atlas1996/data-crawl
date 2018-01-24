@@ -44,9 +44,12 @@ def idiom_select(x, mode, opt):
             return random.choice(f.readlines())[:-1]
     else:
         with open('idiom.txt','r') as f:
+<<<<<<< HEAD
             #以下六行代码，通过索引排除无效循环，显著提升运行效率
             pinyin = chinese_to_pinyin(x[-1])
             base = f.readlines()
+=======
+>>>>>>> 698c4757f494d8bec875ca2e774ba892579a44a8
             random.shuffle(base)
             for i in base:
                 if i[:-1] == x or (opt == 0 and len(i) != 5):
