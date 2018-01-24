@@ -109,9 +109,6 @@ def start(start = 0):
         if city2 in memory:
             print("游戏结束！该城市名已被使用过")
             return 0
-        if city_confirm(city1, city2) == False:
-            print("游戏结束！你未遵守游戏规则")
-            return 0
         memory.add(city2)
         cycle_flag = 0
         while True:
